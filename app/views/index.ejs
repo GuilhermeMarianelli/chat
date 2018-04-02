@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+	<style type="text/css">
+		h1{letter-spacing: 1.5px;}
+	</style>
+</head>
+<body>
+	<div class="container div-form">
+		<div class="row justify-content-md-center align-items-center">
+			<div class="col-4">
+				<h1 class="text-center">#NodeChat</h1>
+				<form action="/" method="post">
+					<div class="form-group">
+						<input type="nickname" name="nickname" class="form-control" placeholder="Digite um apelido" value="<%=data.nickname %>">
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Entrar</button>
+				</form>
+				<br>
+				<% if(erros){ %>
+				<% for(var i = 0; i < erros.length; i++){ %>
+				<div class="alert alert-danger">
+					<p><strong>Danger! </strong><%= erros[i].msg %></p>
+				</div>
+				<% } %>
+				<% } %>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript"></script>	
+</body>
+</html>

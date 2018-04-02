@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+		.fixed{
+			position: fixed;
+			bottom: 0px;
+		}
+		#messages{
+			list-style-type: none;
+		}
+		#messages li{
+			padding: 5px 10px;
+		}
+		#messages li:nht-child(odd){
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<ul id="messages"></ul>
+			</div>
+		</div>
+		<div class="row fixed">
+			<div class="col-12">
+				<form class="form-inline" method="post" action="/chat">
+  					<input type="text" class="form-control" name="message" id="message">
+    				<button class="btn btn-primary" type="submit"> >> </button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var client = io();
+			$('form').submit(function(){
+				client.emit('chat message',$('#message').val());
+				$('#message').val('');
+				return false;
+			});
+			client.on('chat message',function(msg){
+				$('#messages').append($('<li>').text(msg));
+			});
+		});
+		
+	</script>
+</body>
+</html>
